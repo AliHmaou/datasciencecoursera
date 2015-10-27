@@ -19,15 +19,15 @@ corr <- function(directory, threshold = 0) {
   
   
   ## Utilisation de la library stringr pour retrouver un lpad correct
+  #install.packages("stringr")
   library(stringr)
-  
-  ## Vector final où seront stockés les résultats de la fonction corr appliqué à chaque jeu de données correct
+  ## Vector final o? seront stock?s les r?sultats de la fonction corr appliqu? ? chaque jeu de donn?es correct
   finalvector<-vector()
 
   ## Pour chaque capteur
   for(current_id in 1:332){
     
-    ## On crée le nom de fichier en s'appuyant sur str_pad (1->001.csv)
+    ## On cr?e le nom de fichier en s'appuyant sur str_pad (1->001.csv)
     filename <- paste(str_pad(current_id, width=3, side="left", pad="0"), ".csv", sep="")
     
     ## DEBUG
@@ -51,16 +51,16 @@ corr <- function(directory, threshold = 0) {
     ##DEBUG
     #print(nbComplete)
     
-    ## Si le dataset est correct le nombre de complete.Cases est supérieur au seuil 
+    ## Si le dataset est correct le nombre de complete.Cases est sup?rieur au seuil 
     if(nbComplete>threshold){
       
-      ## On sélectionne les lignes complète du fichier en cours
+      ## On s?lectionne les lignes compl?te du fichier en cours
       completeTempDf <- tempdf[complete.cases(tempdf),]
       
       ##DEBUG
       #print(str(completeTempDf))
       
-      ## On utilise la fonction corr sur les colonnes sulfate et nitrate et on ajoute le résultat au vecteur final
+      ## On utilise la fonction corr sur les colonnes sulfate et nitrate et on ajoute le r?sultat au vecteur final
       finalvector<-c(finalvector, cor(completeTempDf$sulfate, completeTempDf$nitrate))
     }
     
@@ -80,7 +80,7 @@ corr <- function(directory, threshold = 0) {
 # make sure your working directory has the file corr.R in it.
 
 
-directory = "D:/DataScience/Project/datasciencecoursera/R Programming/Programming Assignment 1 Air Pollution/specdata/"
+directory = "./specdata"
 
 result<- corr(directory,400)
 
